@@ -16,11 +16,5 @@
     },
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "mock/**/*",
-    "src/**/*",
-    "config/**/*",
-    ".umirc",
-    "typings.d.ts", "public/ww.js"
-  ]
+  "include": ["mock/**/*", "src/**/*", "config/**/*", ".umirc", "typings.d.ts", "public/ww.js"]
 }
