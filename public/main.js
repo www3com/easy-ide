@@ -2,7 +2,8 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
+if (require('electron-squirrel-startup')) {
+  // eslint-disable-line global-require
   app.quit();
 }
 
@@ -41,7 +42,7 @@ app.on('ready', createWindow);
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   // if (process.platform !== 'darwin') {
-    app.quit();
+  app.quit();
   // }
 });
 
@@ -56,29 +57,27 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific root process
 // code. You can also put them in separate files and import them here.
 
-
-
-
-var exec = require("child_process").exec;
+var exec = require('child_process').exec;
 
 module.exports = function myTest() {
-
-    return new Promise(function(resolve, reject) {
-
-        var cmd = "ipconfig";
-        exec(cmd,{
-            maxBuffer: 1024 * 2000
-        }, function(err, stdout, stderr) {
-            if (err) {
-                console.log(err);
-                reject(err);
-            } else if (stderr.lenght > 0) {
-                reject(new Error(stderr.toString()));
-            } else {
-                console.log(stdout);
-                resolve();
-            }
-        });
-    });
+  return new Promise(function(resolve, reject) {
+    var cmd = 'ipconfig';
+    exec(
+      cmd,
+      {
+        maxBuffer: 1024 * 2000,
+      },
+      function(err, stdout, stderr) {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else if (stderr.lenght > 0) {
+          reject(new Error(stderr.toString()));
+        } else {
+          console.log(stdout);
+          resolve();
+        }
+      },
+    );
+  });
 };
-

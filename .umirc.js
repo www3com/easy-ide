@@ -1,7 +1,5 @@
-
 // ref: https://umijs.org/config/
 export default {
-
   publicPath: './',
   dva: false,
   hash: true,
@@ -9,26 +7,22 @@ export default {
     type: 'none',
   },
 
-    exportStatic: {
+  exportStatic: {
     // htmlSuffix: true,
     dynamicRoot: true,
   },
 
   routes: [
     {
-      base:'./dist',
+      base: './dist',
       path: './',
       component: '../layouts/index',
-      routes: [
-        { path: './index.html', component: '../pages/home/index' },
-      ],
+      routes: [{ path: './index.html', component: '../pages/home/index' }],
     },
   ],
-
-
 
   // mpa: {},
   theme: {
     '@primary-color': '#103648',
   },
-}
+};

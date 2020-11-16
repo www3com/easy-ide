@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Root from './component/Root';
 import { Provider } from 'mobx-react';
@@ -12,7 +11,7 @@ export default function() {
   return (
     <ConfigProvider locale={zhCN}>
       <Provider store={store}>
-        <Root/>
+        <Root />
       </Provider>
     </ConfigProvider>
   );

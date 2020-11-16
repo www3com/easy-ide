@@ -1,22 +1,19 @@
 {
-  "name": "easy-ide",
-  "productName": "easy-ide",
+  "private": true,
+  "name": "EasyIDE",
   "version": "1.0.0",
-  "description": "My Electron application description",
-  "main": ".webpack/main",
+  "main": "./dist/main.js",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "umi dev",
+    "start:electron": "NODE_ENV=development electron-forge start",
+    "build": "umi build",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts ."
+    "test": "umi test",
+    "lint": "eslint {src,mock,tests}/**/*.{js,jsx} --fix",
+    "precommit": "lint-staged"
   },
-  "keywords": [],
-  "author": {
-    "name": "wangjz",
-    "email": "wangjz@miyzh.com"
-  },
-  "license": "MIT",
   "config": {
     "forge": {
       "packagerConfig": {},
@@ -24,7 +21,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "easy_ide"
+            "name": "electron_app"
           }
         },
         {
@@ -41,58 +38,52 @@
           "name": "@electron-forge/maker-rpm",
           "config": {}
         }
-      ],
-      "plugins": [
-        [
-          "@electron-forge/plugin-webpack",
-          {
-            "mainConfig": "./webpack.main.config.js",
-            "renderer": {
-              "config": "./webpack.renderer.config.js",
-              "entryPoints": [
-                {
-                  "html": "./src/index.html",
-                  "js": "./src/renderer.tsx",
-                  "name": "main_window"
-                }
-              ]
-            }
-          }
-        ]
       ]
     }
   },
+  "dependencies": {
+    "antd": "4.8.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "mobx": "^6.0.4",
+    "mobx-react": "^7.0.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-split-pane": "^0.1.92"
+  },
   "devDependencies": {
+    "@ant-design/icons": "^4.1.0",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "@electron-forge/plugin-webpack": "6.0.0-beta.54",
-    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
-    "css-loader": "^4.2.1",
+    "@umijs/preset-react": "^1.5.1",
+    "@umijs/test": "^3.2.0",
+    "babel-eslint": "^9.0.0",
     "electron": "10.1.5",
-    "eslint": "^7.6.0",
-    "eslint-plugin-import": "^2.20.0",
-    "fork-ts-checker-webpack-plugin": "^5.0.14",
-    "node-loader": "^1.0.1",
-    "style-loader": "^1.2.1",
-    "ts-loader": "^8.0.2",
-    "typescript": "^4.0.2"
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "react-test-renderer": "^16.7.0",
+    "umi": "^3.2.27"
   },
-  "dependencies": {
-    "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.9",
-    "@types/react-router": "^5.1.8",
-    "@types/react-router-dom": "^5.1.6",
-    "antd": "^4.8.2",
-    "electron-squirrel-startup": "^1.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-hot-loader": "^4.13.0",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0"
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
   }
 }
